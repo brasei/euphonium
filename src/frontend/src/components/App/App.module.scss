@@ -1,0 +1,28 @@
+.mainWrapper {
+    color: var(--text-primary) !important;
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    width: 100vw;
+    min-height: 100vh;
+
+    &__mainContent {
+        flex-grow: 1;
+        display: flex;
+        flex-flow: column;
+    }
+}
+
+.mainWrapperWaves {
+    background: url(../../assets/waves-bg.svg);
+    background-size: auto 100%;
+}
+
+.mainWrapperStatic {
+    background: var(--secondary-color);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}

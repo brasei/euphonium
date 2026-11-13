@@ -1,0 +1,10 @@
+CompileFlags:
+   CompilationDatabase: src/targets/esp32/build # Search build/ directory for compile_commands.json
+   Add:
+      [
+         -Wno-unknown-warning,
+         -ferror-limit=0,
+         -mlong-calls,
+      ]
+   Remove:
+      [-mlongcalls, -fstrict-volatile-bitfields, -fno-tree-switch-conversion]

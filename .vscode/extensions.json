@@ -1,7 +1,0 @@
-{
-    "recommendations": [
-        "espressif.esp-idf-extension",
-        "berry.berry",
-        "platformio.platformio-ide"
-    ]
-}
