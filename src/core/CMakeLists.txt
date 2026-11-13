@@ -11,12 +11,16 @@ set(CSPOT_EXTERNAL_BELL "bell"
 )
 
 # External libraries
+# bell vendors nlohmann_json as a submodule; force cJSON-only so the build does
+# not depend on that (possibly uninitialized) nested submodule. euphonium provides
+# its own vendored nlohmann/json.hpp below.
+set(BELL_ONLY_CJSON ON CACHE BOOL "Use cJSON instead of nlohmann_json" FORCE)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/bell ${CMAKE_CURRENT_BINARY_DIR}/bell)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/berry ${CMAKE_CURRENT_BINARY_DIR}/berry)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/cspot/cspot ${CMAKE_CURRENT_BINARY_DIR}/cspot)
 
 # Include external header libraries
-include_directories("external/filesystem")
+include_directories("external/filesystem" "external/nlohmann_json")
 
 # Source glob
 file(GLOB SOURCES "main/app/*.cpp" "main/app/*.c" "main/plugins/*.cpp" "main/plugins/*.c" "main/multiroom/*.c" "main/multiroom/*.cpp")
@@ -69,4 +73,4 @@ endif()
 add_library(euphonium STATIC ${SOURCES})
 
 target_link_libraries(euphonium PUBLIC cspot bell berry ${EXTRA_REQ_LIBS})
-target_include_directories(euphonium PUBLIC "external/filesystem" "main/app/include" "main/plugins/include" "main/multiroom/include" "protos" bell cspot ${EXTRA_REQ_LIBS} ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(euphonium PUBLIC "external/filesystem" "external/nlohmann_json" "main/app/include" "main/plugins/include" "main/multiroom/include" "protos" bell cspot ${EXTRA_REQ_LIBS} ${CMAKE_CURRENT_BINARY_DIR})
